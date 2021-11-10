@@ -39,13 +39,43 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
 
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
 
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
 
+const kyler = new Person('Kyler', 25);
+const ben = new Person('Bennett', 28);
+
+console.log(kyler.toString())
+console.log(ben.toString())
+
+ben.eat('Pizza');
+ben.eat('Tacos');
+ben.eat('Sushi');
+ben.eat('Sandwich');
+ben.eat('cake');
+
+console.log(ben.stomach)
+
+ben.poop()
+
+console.log(ben.stomach);
 
 
 
@@ -63,9 +93,17 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function(gal){
+  this.tank = this.tank + gal;
+}
+
+
 
 
 /*
@@ -75,18 +113,27 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+ Person.call(this, name, age);
+ this.favoriteToy = favoriteToy;
 }
+
+Baby.prototype = Object.create(Person.prototype);
+
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
+}
+
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global Binding - When in the global scope, the value of "this" will be the window
+  2. Implicit Binding - whenever a function is called by a preceeding dot, the object left of the dot get 'this'
+  3. New Binding - whenever a construction function is used, this refers to the object that is created and returned by the constructor function. 
+  4. Explicit Binding - Objects passed as first parameter in call(), apply(), and bind()
 */
 
 
