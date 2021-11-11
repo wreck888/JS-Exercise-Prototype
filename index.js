@@ -7,6 +7,8 @@
         + If a plane lands, its `isFlying` property is set to false.
 */
 
+const { thisTypeAnnotation } = require("@babel/types");
+
 // EXAMPLE SOLUTION CODE:
 function Airplane(name) {
   this.name = name;
@@ -103,8 +105,28 @@ Car.prototype.fill = function(gal){
   this.tank = this.tank + gal;
 }
 
-
-
+Car.prototype.drive = function(distance){
+  this.odometer = this.odometer + distance;
+  this.tank = this.tank - (distance / this.milesPerGallon);
+  if(this.tank <= 0){
+    return `I ran out of fuel at ${this.odometer}`;
+  }
+}
+const Mclaren = new Car('MclarenP1', 17)
+console.log('task 2', Mclaren.fill(17))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(50))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(50))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(50))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(50))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(50))
+console.log('task 2', Mclaren)
+console.log('task 2', Mclaren.drive(40))
+console.log('task 2', Mclaren)
 
 /*
   TASK 3
